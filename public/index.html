@@ -1,13 +1,13 @@
 <!doctype html>
 
 <!-- ASSIGN OUR ANGULAR MODULE -->
-<html ng-app="scotchTodo">
+<html ng-app="orderYerFood">
 <head>
 	<!-- META -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
 
-	<title>Node/Angular Todo App</title>
+	<title>Node/Angular Food App</title>
 
 	<!-- SCROLLS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
@@ -15,15 +15,16 @@
 	<style>
 		html 					{ overflow-y:scroll; }
 		body 					{ padding-top:50px; }
-		#todo-list 				{ margin-bottom:30px; }
-		#todo-form 	 			{ margin-bottom:50px; }
+		#food-list 				{ margin-bottom:30px; }
+		#food-form 	 			{ margin-bottom:20px; }
+
 	</style>
 
 	<!-- SPELLS -->
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
 
 	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
-	<script src="js/services/todos.js"></script> <!-- load our todo service -->
+	<script src="js/services/foods.js"></script> <!-- load our food service -->
 	<script src="js/core.js"></script> <!-- load our main application -->
 
 </head>
@@ -31,21 +32,18 @@
 <body ng-controller="mainController">
 	<div class="container">
 
-		<!-- HEADER AND TODO COUNT -->
+		<!-- HEADER AND FOOD COUNT -->
 		<div class="jumbotron text-center">
-			<h1>I'm a Todo-aholic <span class="label label-info">{{ todos.length }}</span></h1>
+			<h1>It's Chow Time <span class="label label-info">{{ foods.length }}</span></h1>
 		</div>
 
-		<!-- TODO LIST -->
-		<div id="todo-list" class="row">
+		<!-- FOOD LIST -->
+		<div id="food-list" class="row">
 			<div class="col-sm-4 col-sm-offset-4">
-
-				
-
-				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				<div class="checkbox" ng-repeat="todo in todos">
+				<!-- LOOP OVER THE FOODS IN $scope.foods -->
+				<div class="checkbox" ng-repeat="food in foods">
 					<label>
-						<input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
+						<input type="checkbox" ng-click="deleteFood(food._id)" class="fa fa-times"> {{ food.name }} for ${{ food.price }}
 					</label>
 				</div>
 
@@ -56,25 +54,32 @@
 			</div>
 		</div>
 
-		<!-- FORM TO CREATE TODOS -->
-		<div id="todo-form" class="row">
+		<!-- FORM TO CREATE FOODS -->
+		<div id="food-form" class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
 				<form>
 					<div class="form-group">
 
-						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-						<input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text">
+						<!-- BIND THESE VALUES TO formData IN ANGULAR -->
+						<input type="text" class="form-control input-lg text-center" placeholder="Whaddaya wanna eat?" ng-model="formData.name">
+						<input type="text" class="form-control input-lg text-center" placeholder="How much you gonna pay? (eg. 5)" ng-model="formData.price">
 					</div>
 
-					<!-- createToDo() WILL CREATE NEW TODOS -->
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+					<!-- createFood() WILL CREATE NEW FOODS -->
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="createFood()">Add item</button>
 				</form>
 			</div>
 		</div>
 
-		<div class="text-center text-muted">
-			<p>A demo by <a href="http://scotch.io">Scotch</a>.</p>
-			<p>Read the <a href="http://scotch.io/tutorials/javascript/creating-a-single-page-todo-app-with-node-and-angular">tutorial</a>.</p>
+		<!-- GET THE TOTAL -->
+		<div id="food-total" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<div id="food-total">
+					<div id="total">
+					<h3>{{ total }}</h3>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div>

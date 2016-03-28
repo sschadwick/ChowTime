@@ -1,9 +1,9 @@
 {
-  "name"         : "node-todo",
-  "version"      : "0.0.1",
-  "description"  : "Simple todo application.",
+  "name"         : "chow-time",
+  "version"      : "1.0.0",
+  "description"  : "Food Ordering app build for Master Chef Emeril",
   "main"         : "server.js",
-  "author"       : "Scotch",
+  "author"       : "Steven Chadwick",
   "dependencies" : {
     "express"         : "~4.13.4",
     "mongoose"        : "~3.8.13",
